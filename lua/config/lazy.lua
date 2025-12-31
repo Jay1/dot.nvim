@@ -12,8 +12,10 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import any extras modules here
     --  { import = "lazyvim.plugins.extras.lang.typescript" },
+    --  { import = "lazyvim.plugins.extras.lang.python" },
+    --  { import = "lazyvim.plugins.extras.lang.go" },
     --  { import = "lazyvim.plugins.extras.lang.json" },
-    --  { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    --  { import = "lazyvim.plugins.extras.ui.mini-files" },
     -- import/override with your plugins
     { import = "plugins" },
   },
@@ -32,13 +34,23 @@ require("lazy").setup({
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {
+        "2html_plugin",
+        "getscript",
+        "getscriptPlugin",
         "gzip",
         -- "matchit",
-        -- "matchparen",
+        "logipat",
+        "matchparen",
         -- "netrwPlugin",
+        "rrhelper",
+        "spellfile_plugin",
+        "tar",
         "tarPlugin",
         "tohtml",
         "tutor",
+        "vimball",
+        "vimballPlugin",
+        "zip",
         "zipPlugin",
       },
     },

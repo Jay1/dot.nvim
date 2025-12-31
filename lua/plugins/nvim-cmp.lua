@@ -26,6 +26,17 @@ return {
                 "regex",
                 "vim",
                 "yaml",
+                -- Additional language parsers
+                "typescript",
+                "tsx",
+                "rust",
+                "go",
+                "c",
+                "cpp",
+                "dockerfile",
+                "css",
+                "scss",
+                "sql",
             })
         end,
     },
@@ -56,8 +67,6 @@ return {
             local luasnip = require("luasnip")
             local cmp = require("cmp")
 
-            require("supermaven-nvim").setup({})
-
             return {
                 completion = {
                     completeopt = "menu,menuone,noinsert",
@@ -86,10 +95,10 @@ return {
                 },
                 sources = cmp.config.sources({
                     { name = "supermaven", priority = 1000 },
-                    { name = "path",       priority = 900 },
-                    { name = "buffer",     priority = 800 },
-                    { name = "emoji",      priority = 700 },
-                    { name = "nvim_lsp",   priority = 600 },
+                    { name = "nvim_lsp",   priority = 900 },
+                    { name = "path",       priority = 800 },
+                    { name = "buffer",     priority = 700 },
+                    { name = "emoji",      priority = 600 },
                     { name = "treesitter", priority = 500 },
                     { name = "luasnip",    priority = 400 },
                 }),

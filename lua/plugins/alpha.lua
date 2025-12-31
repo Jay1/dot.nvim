@@ -1,9 +1,14 @@
 return {
   "goolord/alpha-nvim",
+  lazy = true,
+  event = function()
+    if vim.fn.argc() == 0 then
+      return "VimEnter"
+    end
+  end,
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local dashboard = require("alpha.themes.dashboard")
-    local icons = require("nvim-web-devicons")
 
     local function get_extension(fn)
       local match = fn:match("^.+(%..+)$")
