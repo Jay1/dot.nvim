@@ -50,11 +50,6 @@ local options = {
   winminwidth = 5, -- Minimum window width
   cmdheight = 0, -- Hide command line unless needed
   laststatus = 0, -- Disable status line
-  ls = 0, -- Disable line status
-
-  -- Completion
-  completeopt = "menu,menuone,noselect", -- Completion options
-  pumheight = 10, -- Maximum number of items in completion menu
 
   -- Performance
   updatetime = 200, -- Faster completion and better UX
@@ -105,8 +100,5 @@ for k, v in pairs(globals) do
   g[k] = v
 end
 
--- Neovim 0.9+ specific settings
-if vim.fn.has("nvim-0.9.0") == 1 then
-  opt.splitkeep = "screen" -- Keep splits positioned when resizing
-  opt.shortmess:append({ C = true }) -- Don't show completion messages
-end
+opt.splitkeep = "screen" -- Keep splits positioned when resizing
+opt.shortmess:append({ C = true }) -- Don't show completion messages

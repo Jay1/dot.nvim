@@ -1,6 +1,7 @@
 return {
   "goolord/alpha-nvim",
   lazy = true,
+  opts = false,
   event = function()
     if vim.fn.argc() == 0 then
       return "VimEnter"
@@ -108,11 +109,11 @@ return {
 
     dashboard.section.header.val = vim.split(logo, "\n", { trimempty = true })
     dashboard.section.buttons.val = {
-      dashboard.button("p", "📁 " .. "Open project", "<cmd>Telescope project display_type=full<cr>"),
+      dashboard.button("p", "📁 " .. "Open project", "<cmd>lua Snacks.picker.projects()<cr>"),
       dashboard.button("e", "🍃 " .. "New file", "<cmd>ene <BAR> startinsert<cr>"),
-      dashboard.button("f", "🔍 " .. "Find file", ":Telescope find_files <CR>"),
-      dashboard.button("r", "⏳ " .. "Recent files", "<CMD>Telescope oldfiles<cr>"),
-      dashboard.button("c", "💿 " .. "Config", ":e $MYVIMRC | :cd %:p:h | Telescope find_files<cr>"),
+      dashboard.button("f", "🔍 " .. "Find file", "<cmd>lua Snacks.picker.files()<cr>"),
+      dashboard.button("r", "⏳ " .. "Recent files", "<cmd>lua Snacks.picker.recent()<cr>"),
+      dashboard.button("c", "💿 " .. "Config", "<cmd>lua vim.cmd('e ' .. vim.fn.expand('$MYVIMRC')); vim.cmd('cd ' .. vim.fn.fnamemodify(vim.fn.expand('$MYVIMRC'), ':p:h')); Snacks.picker.files()<cr>"),
       dashboard.button("l", "🩷 " .. "Lazy", "<cmd>Lazy<cr>"),
       dashboard.button("v", "💙 " .. "LazyExtras", "<cmd>LazyExtras<cr>"),
       dashboard.button("m", "🧱 " .. "Mason", "<cmd>Mason<cr>"),

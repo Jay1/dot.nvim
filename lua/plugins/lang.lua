@@ -1,6 +1,44 @@
 -- Additional language-specific configurations
 return {
   {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, {
+        "bash",
+        "html",
+        "lua",
+        "python",
+        "query",
+        "regex",
+        "vim",
+        "c",
+        "cpp",
+        "dockerfile",
+        "css",
+        "scss",
+      })
+    end,
+  },
+  {
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = {
+      linters_by_ft = {
+        markdown = {},
+      },
+    },
+  },
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        ["markdown"] = {},
+        ["markdown.mdx"] = {},
+      },
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
@@ -52,6 +90,22 @@ return {
             },
           },
         },
+      },
+    },
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {
+      heading = {
+        sign = false,
+        icons = {},
+        position = "inline",
+        border = true,
+        above = "▄",
+        below = "▀",
+        width = "block",
+        left_pad = 0,
+        right_pad = 4,
       },
     },
   },

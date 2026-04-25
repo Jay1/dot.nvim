@@ -18,17 +18,6 @@ vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window 
 vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
--- LSP keymaps (when LSP is available)
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
-vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol" })
-vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Show diagnostics" })
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-
 -- Better search and replace
 vim.keymap.set("n", "<leader>sr", ":%s/<C-r><C-w>//g<Left><Left>", { desc = "Replace word under cursor" })
 vim.keymap.set("v", "<leader>sr", '"hy:%s/<C-r>h//g<Left><Left>', { desc = "Replace selected text" })

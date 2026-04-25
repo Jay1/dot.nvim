@@ -6,7 +6,6 @@ return {
     branch = "harpoon2",
     dependencies = {
         "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope.nvim",
     },
 
     -- ----------------------------------------------------------------------- }}}
@@ -14,24 +13,6 @@ return {
 
     keys = function()
         local harpoon = require("harpoon")
-        local conf = require("telescope.config").values
-
-        local function toggle_telescope(harpoon_files)
-            local file_paths = {}
-            for _, item in ipairs(harpoon_files.items) do
-                table.insert(file_paths, item.value)
-            end
-            require("telescope.pickers")
-                .new({}, {
-                    prompt_title = "Harpoon",
-                    finder = require("telescope.finders").new_table({
-                        results = file_paths,
-                    }),
-                    previewer = conf.file_previewer({}),
-                    sorter = conf.generic_sorter({}),
-                })
-                :find()
-        end
 
         return {
             -- Harpoon marked files 1 through 4
@@ -91,16 +72,16 @@ return {
             {
                 "<leader>hh",
                 function()
-                    toggle_telescope(harpoon:list())
+                    harpoon.ui:toggle_quick_menu(harpoon:list())
                 end,
                 desc = "Harpoon quick menu",
             },
 
-            -- Use Telescope as Harpoon user interface.
+            -- Harpoon user interface.
             {
                 "<a-9>",
                 function()
-                    toggle_telescope(harpoon:list())
+                    harpoon.ui:toggle_quick_menu(harpoon:list())
                 end,
                 desc = "Open Harpoon window",
             },
@@ -120,7 +101,7 @@ return {
             excluded_filetypes = { "harpoon", "alpha", "dashboard", "gitcommit" },
             mark_branch = false,
             key = function()
-                return vim.loop.cwd()
+                return vim.fn.getcwd()
             end,
         }
     end,

@@ -1,12 +1,6 @@
 return {
     "supermaven-inc/supermaven-nvim",
     config = function()
-        require("supermaven-nvim").setup({
-            -- Add any specific configuration options here
-        })
+        require("supermaven-nvim").setup({})
     end,
-    dependencies = {
-        "hrsh7th/nvim-cmp",
-    },
 }
-
