@@ -4,20 +4,20 @@ return {
   event = "BufReadPre",
   opts = {
     ensure_installed = {
-      "bashls",
-      "tailwindcss",
+      "bash-language-server",
+      "tailwindcss-language-server",
       "pyright",
-      "lua_ls",
-      "emmet_ls",
-      "jsonls",
+      "lua-language-server",
+      "emmet-ls",
+      "json-lsp",
       -- Additional language servers
-      "ts_ls",           -- TypeScript/JavaScript
-      "rust_analyzer",   -- Rust
-      "gopls",           -- Go
-      "clangd",          -- C/C++
-      "yamlls",          -- YAML
-      "html",            -- HTML
-      "cssls",           -- CSS
+      "typescript-language-server", -- TypeScript/JavaScript
+      "rust-analyzer",              -- Rust
+      "gopls",                      -- Go
+      "clangd",                     -- C/C++
+      "yaml-language-server",       -- YAML
+      "html-lsp",                   -- HTML
+      "css-lsp",                    -- CSS
     },
     ui = {
       icons = {

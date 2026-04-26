@@ -1,76 +1,120 @@
-# 🌌 vdot - A Customized Neovim Configuration
+# dot.nvim
 
-Feature-rich Neovim configuration designed for efficient coding and productivity. 
-It leverages modern plugins and configurations to enhance your development experience.
+A LazyVim-based Neovim configuration with a curated set of plugins for full-stack development.
 
+Built on [LazyVim](https://www.lazyvim.org/) and [lazy.nvim](https://github.com/folke/lazy.nvim).
 
-## 🚀 Features
+## What's inside
 
-- **🧠 LSP Integration**: Intelligent code completion and navigation.
-- **🔍 Fuzzy Finding**: Quickly search files and content with [Telescope](https://github.com/nvim-telescope/telescope.nvim).
-- **🐙 Git Integration**: Seamless interaction with Git repositories.
-- **⌨️ Custom Keybindings**: Tailored keybindings for an improved workflow.
-- **🎨 Beautiful UI**: Aesthetic and customizable interface with the [Catppuccin](https://github.com/catppuccin/nvim) theme.
+| Category | Tools |
+|---|---|
+| **Framework** | LazyVim starter with custom overrides |
+| **Completion** | [blink.cmp](https://github.com/Saghen/blink.cmp) + [Supermaven](https://github.com/supermaven-inc/supermaven-nvim) (AI) |
+| **Fuzzy Picker** | [Snacks Picker](https://github.com/folke/snacks.nvim) |
+| **LSP** | [Mason](https://github.com/mason-org/mason.nvim) with 13 language servers |
+| **Colorscheme** | [Catppuccin Mocha](https://github.com/catppuccin/nvim) (transparent background) |
+| **Navigation** | [Harpoon 2](https://github.com/ThePrimeagen/harpoon), [Flash](https://github.com/folke/flash.nvim) |
+| **UI** | [Alpha](https://github.com/goolord/alpha-nvim) dashboard, [Noice](https://github.com/folke/noice.nvim), [Bufferline](https://github.com/akinsho/bufferline.nvim), [Lualine](https://github.com/nvim-lualine/lualine.nvim) |
+| **Git** | [Gitsigns](https://github.com/lewis6991/gitsigns.nvim), LazyVim Git extras |
+| **Editing** | [Mini.ai](https://github.com/echasnovski/mini.ai), [Mini.pairs](https://github.com/echasnovski/mini.pairs), [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag), [todo-comments](https://github.com/folke/todo-comments.nvim) |
+| **Formatting/Linting** | [conform.nvim](https://github.com/stevearc/conform.nvim), [nvim-lint](https://github.com/mfussenegger/nvim-lint) |
+| **Search/Replace** | [grug-far.nvim](https://github.com/MagicDuck/grug-far.nvim) |
+| **Database** | [vim-dadbod](https://github.com/kristijanhusak/vim-dadbod) + UI + completion |
+| **Session** | [persistence.nvim](https://github.com/folke/persistence.nvim) |
+| **Markdown** | [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim), [markdown-preview](https://github.com/iamcco/markdown-preview.nvim) |
 
-## 📋 Prerequisites
+### Language support (LazyVim extras)
 
-- **Neovim** >= 0.8.0
-- **ripgrep**: For searching files.
-- **fd**: A simple, fast, and user-friendly alternative to `find`.
+Go, Rust, TypeScript, JSON, Markdown, SQL, Tailwind CSS, TOML, YAML, Git
 
-## 📥 Installation
+### Treesitter parsers
 
-1. **Backup your existing Neovim configuration**:
-   ```bash
-   mv ~/.config/nvim ~/.config/nvim.bak
+Bash, HTML, Lua, Python, C, C++, Dockerfile, CSS, SCSS, Regex, Vim, Query
 
-Clone this repository:
-bash
-git clone https://github.com/jay1/vdot.git ~/.config/nvim
+### Mason language servers
 
-Install required dependencies:
-Ensure you have ripgrep and fd installed. You can install them using your package manager, e.g.:
-bash
-sudo apt install ripgrep fd
+`bash-language-server`, `tailwindcss-language-server`, `pyright`, `lua-language-server`, `emmet-ls`, `json-lsp`, `typescript-language-server`, `rust-analyzer`, `gopls`, `clangd`, `yaml-language-server`, `html-lsp`, `css-lsp`
 
-Open Neovim and let the update go thru. 
+## Structure
 
-This will install all the necessary plugins.
-Check health:
-text
-:checkhealth
+```
+~/.config/nvim/
+├── init.lua                  # Entry point: loads lazy, sets up tmux integration
+├── lua/
+│   ├── config/
+│   │   ├── lazy.lua          # Plugin manager bootstrap + LazyVim setup
+│   │   ├── options.lua       # Editor options (numbers, indents, clipboard, WSL support)
+│   │   ├── keymaps.lua       # Custom keybindings
+│   │   └── autocmds.lua      # Trim whitespace on save, markdown conceal
+│   └── plugins/
+│       ├── alpha.lua         # Dashboard with ASCII art + recent files
+│       ├── color.lua         # Catppuccin Mocha (transparent)
+│       ├── eunuch.lua        # vim-eunuch (Unix shell commands)
+│       ├── fidget.lua        # LSP progress notifications
+│       ├── harpoon.lua       # Harpoon 2 quick-switch
+│       ├── lang.lua          # Treesitter parsers, LSP configs, markdown renderer
+│       ├── mason.lua         # Language server auto-install
+│       ├── noice.lua         # Cmdline/UI overhaul
+│       ├── quality.lua       # todo-comments, autotag
+│       └── supermaven.lua    # AI completion
+├── stylua.toml               # Lua formatter config (2-space indent)
+├── .neoconf.json             # neodev/neoconf settings
+└── lazy-lock.json            # Pinned plugin versions
+```
 
-Make sure everything is set up correctly.
+## Keybindings
 
-## ⌨️ Key Bindings
-<leader>f: Open Telescope to find files.
-<leader>r: Open recent files.
-<leader>g: Git commands.
-<leader>e: Edit the current configuration.
+| Key | Mode | Action |
+|---|---|---|
+| `<leader>1-4` | Normal | Harpoon buffer 1-4 |
+| `<leader>ha` | Normal | Add file to Harpoon |
+| `<leader>hh` | Normal | Harpoon quick menu |
+| `<leader>sr` | Normal/Visual | Replace word under cursor / selected text |
+| `<leader>w` | Normal | Save file |
+| `<leader>q` | Normal | Quit window |
+| `<leader>Q` | Normal | Force quit all |
+| `<leader>bd` | Normal | Delete buffer |
+| `<leader>tw` | Normal | Toggle line wrap |
+| `<leader>ts` | Normal | Toggle spell check |
+| `<leader>tn` | Normal | Toggle line numbers |
+| `<leader>tr` | Normal | Toggle relative numbers |
+| `J` / `K` | Visual | Move selection down/up |
+| `<C-h/j/k/l>` | Normal | Window navigation |
+| `<C-Arrows>` | Normal | Resize windows |
+| `]t` / `[t` | Normal | Jump to next/prev TODO comment |
 
-## 📦 Plugins
-vdot includes the following plugins:
-nvim-treesitter: Enhanced syntax highlighting.
-nvim-lspconfig: Easy LSP configuration.
-telescope.nvim: Fuzzy finder.
-nvim-web-devicons: File icons.
-catppuccin: Beautiful color scheme.
+Plus all [LazyVim defaults](https://www.lazyvim.org/keymaps).
 
-## 🛠️ Customization
-Feel free to customize the configuration to suit your needs. You can modify keybindings, themes, and plugins in the init.lua and lua/plugins/ files.
+## Prerequisites
 
-## 🐞 Troubleshooting
-If you encounter any issues, try the following:
-Run :checkhealth to identify any missing dependencies.
-Check the Neovim logs for any errors.
+- **Neovim** >= 0.9.0
+- **Git** >= 2.19.0
+- **ripgrep** (for search)
+- **fd** (for file finding)
+- **Nerd Font** (for icons)
+- **Optional**: `win32yank.exe` (WSL clipboard support)
 
-## 🤝 Contributing
-Contributions are welcome! If you have suggestions or improvements, please feel free to submit a Pull Request.
+## Install
 
-## 📄 License
-This project is licensed under the MIT License. See the LICENSE file for details.
+```bash
+# Back up existing config
+mv ~/.config/nvim ~/.config/nvim.bak
 
-## 🙏 Acknowledgements
-Thanks to the Neovim community for their amazing plugins and support.
-Inspired by various Neovim configurations available online.
-Feel free to reach out if you have any questions or need assistance!
+# Clone
+git clone https://github.com/Jay1/dot.nvim.git ~/.config/nvim
+
+# Start Neovim — plugins install automatically
+nvim
+```
+
+Run `:checkhealth` after first launch to verify everything.
+
+## Autocmds
+
+- **Trim trailing whitespace** on save
+- **Markdown conceal** set to level 2 for `.md` / `.mdx` files
+- **Tmux status bar** auto-hides when Neovim opens inside tmux, restores on exit
+
+## License
+
+[Apache 2.0](LICENSE)
