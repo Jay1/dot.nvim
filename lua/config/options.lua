@@ -74,17 +74,30 @@ local globals = {
   snacks_animate = false, -- Disable snacks animation
 }
 
--- WSL clipboard provider using win32yank
+local function executable(path)
+  return vim.fn.executable(path) == 1
+end
+
+-- WSL clipboard provider. Prefer win32yank when present, but fall back to the
+-- built-in Windows clipboard bridge so yanks keep working after WSL rebuilds.
 if vim.fn.has("wsl") == 1 then
+  local copy = "win32yank.exe -i --crlf"
+  local paste = "win32yank.exe -o --lf"
+
+  if not executable("win32yank.exe") then
+    copy = "/mnt/c/Windows/System32/clip.exe"
+    paste = '/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -Command "Get-Clipboard -Raw"'
+  end
+
   vim.g.clipboard = {
-    name = "win32yank-wsl",
+    name = "windows-clipboard-wsl",
     copy = {
-      ["+"] = "win32yank.exe -i --crlf",
-      ["*"] = "win32yank.exe -i --crlf",
+      ["+"] = copy,
+      ["*"] = copy,
     },
     paste = {
-      ["+"] = "win32yank.exe -o --lf",
-      ["*"] = "win32yank.exe -o --lf",
+      ["+"] = paste,
+      ["*"] = paste,
     },
     cache_enabled = 0,
   }
